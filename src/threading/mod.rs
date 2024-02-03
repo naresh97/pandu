@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod attributes;
 pub use attributes::SchedulerPolicy;
 pub use attributes::ThreadAttributes;

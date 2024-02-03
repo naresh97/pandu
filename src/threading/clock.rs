@@ -16,7 +16,7 @@ impl Clock {
             0 => Ok(Clock {
                 timespec: unsafe { timespec.assume_init() },
             }),
-            _ => Err(ThreadingError {}),
+            _ => Err(ThreadingError::new("Could not get clock time")),
         }
     }
     pub fn sleep(&mut self, duration: std::time::Duration) -> ThreadingResult<()> {
@@ -40,7 +40,7 @@ impl Clock {
         };
         match result {
             0 => Ok(()),
-            _ => Err(ThreadingError {}),
+            _ => Err(ThreadingError::new("Could not sleep thread")),
         }
     }
 }
