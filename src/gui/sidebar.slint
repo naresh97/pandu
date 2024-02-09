@@ -1,4 +1,4 @@
-import { VerticalBox } from "std-widgets.slint";
+import { VerticalBox, ScrollView } from "std-widgets.slint";
 component SideBarItem inherits Rectangle {
     in property <bool> selected;
     in-out property <string> text <=> label.text;
@@ -26,8 +26,15 @@ component SideBarItem inherits Rectangle {
 }
 export component SideBar inherits Rectangle {
     out property <int> current-index: 0;
-    VerticalBox {
-        for entry[index] in ["Maps", "Radio", "Cookies"] : SideBarItem{
+    private property sidebarHeight <=> self.height;
+    height: 90%;
+    ScrollView {
+    viewport-height: sidebarHeight*1.5;
+
+    l:=VerticalBox {
+        y: 0px;
+        height: root.sidebarHeight;
+        for entry[index] in ["Maps", "Radio", "Cookies", "Test"] : SideBarItem{
             text: entry;
             click => {root.current-index = index;}
             selected: root.current-index == index;
@@ -35,6 +42,7 @@ export component SideBar inherits Rectangle {
         alignment: start;
         padding: 0;
         spacing: 0;
+    }
     }
     background: darkslategrey;
     width: 20%;
