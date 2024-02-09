@@ -2,8 +2,8 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "shell",
-			"command": "DOCKER_BUILDKIT=1 cross build --target armv7-unknown-linux-gnueabihf",
+			"type": "cargo",
+			"command": "build",
 			"problemMatcher": [
 				"$rustc"
 			],

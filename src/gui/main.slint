@@ -1,0 +1,30 @@
+import { VerticalBox } from "std-widgets.slint";
+import { SideBar } from "sidebar.slint";
+import { StatusBar, StatusBarData } from "statusbar.slint";
+
+export component HomePage inherits VerticalBox {
+    Text {
+        text: "This is some content. Oh wow! Noice :)";
+        color: white;
+        horizontal-alignment: center;
+    }
+    alignment: center;
+}
+export component MainWindow inherits Window{
+    min-width: 800px;
+    min-height: 600px;
+    background: darkslateblue;
+
+    in property <StatusBarData> statusBarData;
+
+    l:=VerticalLayout {
+        HorizontalLayout {
+            padding: 0;
+            spacing: 0;
+            SideBar{}
+            HomePage{}
+        }
+        statusBar := StatusBar { data: root.statusBarData; }
+    }
+
+}

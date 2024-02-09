@@ -13,12 +13,14 @@ debug = 0
 [dependencies]
 slint = { version = "1.4.1", features = [
     "backend-linuxkms-noseat",
+    "backend-qt",
     "renderer-software",
     "renderer-femtovg",
     "compat-1-2",
     "std",
 ], default-features = false }
 libc = "0.2.153"
+chrono = "0.4.33"
 
 [dependencies.nix]
 features = ["user"]
