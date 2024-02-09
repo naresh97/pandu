@@ -2,12 +2,26 @@
 name = "pandu"
 version = "0.1.0"
 edition = "2021"
+build = "build.rs"
+
+[profile.dev]
+opt-level = 0
+debug = 0
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+slint = { version = "1.4.1", features = [
+    "backend-linuxkms-noseat",
+    "renderer-software",
+    "renderer-femtovg",
+    "compat-1-2",
+    "std",
+], default-features = false }
 libc = "0.2.153"
-slint = "1.4.1"
 
 [dependencies.nix]
 features = ["user"]
+
+[build-dependencies]
+slint-build = "1.4.0"

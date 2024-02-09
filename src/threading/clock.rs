@@ -20,7 +20,7 @@ impl Clock {
         }
     }
     pub fn sleep(&mut self, duration: std::time::Duration) -> ThreadingResult<()> {
-        let duration_ns: i64 = duration.as_nanos().try_into().unwrap_or(0);
+        let duration_ns = duration.as_nanos().try_into().unwrap_or(0);
         self.timespec.tv_nsec += duration_ns;
         while self.timespec.tv_nsec >= 1_000_000_000 {
             self.timespec.tv_sec += 1;

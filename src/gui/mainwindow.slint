@@ -1,0 +1,78 @@
+import { VerticalBox } from "std-widgets.slint";
+
+export component SideBarItem inherits Rectangle {
+    in property <bool> selected;
+    in-out property <string> text <=> label.text;
+    callback click <=> touch.clicked;
+    states [
+        selected when root.selected:{
+            background: gray;
+        }
+    ]
+    l := HorizontalLayout {
+        padding-left: 15px;
+        label := Text{
+            height: 10%;
+            vertical-alignment: center;
+            font-size: 20px;
+            color: white;
+        }
+    }
+    touch := TouchArea{
+        width: 100%;
+        height: 100%;
+    }
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.2);
+}
+export component SideBar inherits Rectangle {
+    out property <int> current-index: 0;
+    VerticalBox {
+        for entry[index] in ["Maps", "Radio", "Cookies"] : SideBarItem{
+            text: entry;
+            click => {root.current-index = index;}
+            selected: root.current-index == index;
+        }
+        alignment: start;
+        padding: 0;
+        spacing: 0;
+    }
+    background: darkslategrey;
+    width: 20%;
+}
+export component HomePage inherits VerticalBox {
+    Text {
+        text: "This is some content. Oh wow! Noice :)";
+        color: white;
+        horizontal-alignment: center;
+    }
+    alignment: center;
+}
+export component StatusBar inherits Rectangle{
+    height: 10%;
+    background: rgb(40,40,40);
+    HorizontalLayout {
+        Text {
+            text: "21:25, 8 Feb 2024";
+            vertical-alignment: center;
+            color: white;
+            font-size: 20px;
+        }
+        alignment: center;
+    }
+}
+export component MainWindow inherits Window{
+    min-width: 800px;
+    min-height: 600px;
+    background: darkslateblue;
+
+    VerticalLayout {
+        HorizontalLayout {
+            padding: 0;
+            spacing: 0;
+            SideBar{}
+            HomePage{}
+        }
+        StatusBar {}
+    }
+}
